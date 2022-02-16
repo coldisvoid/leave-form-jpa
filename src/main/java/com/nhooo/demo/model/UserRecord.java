@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -15,6 +16,20 @@ public class UserRecord
     int id;
     String name;
     String email;
+    String department;
+    String workLocation;
+    String memberType;
+    Date hireDate;
+    Date writeDate;
+    String leaveType;
+    String job;
+    Date birthDate;
+    Date graduation;
+    String reason;
+    Date leaveStart;
+    Date leaveEnd;
+    Date returnToWork;
+
 
 
 }
