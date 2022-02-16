@@ -12,14 +12,27 @@ public class UserService
 {
     @Autowired
     private UserRepository userRepository;
+    //获取所有
     public List<UserRecord> getAllUsers()
     {
         List<UserRecord>userRecords = new ArrayList<>();
         userRepository.findAll().forEach(userRecords::add);
         return userRecords;
     }
+    //增加
     public void addUser(UserRecord userRecord)
     {
         userRepository.save(userRecord);
+    }
+    //
+    public void deleteUser(int id)
+    {
+        userRepository.deleteById(id);
+
+    }
+    //
+    public void updateUser(UserRecord userRecord)
+    {
+
     }
 }
