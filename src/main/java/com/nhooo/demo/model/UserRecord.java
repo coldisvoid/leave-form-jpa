@@ -15,7 +15,6 @@ public class UserRecord
     @Id
     int id;
     String name;
-    String email;
     String department;
     String workLocation;
     String memberType;

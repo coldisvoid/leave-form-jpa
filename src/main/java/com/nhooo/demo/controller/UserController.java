@@ -39,6 +39,25 @@ public class UserController
         return pageResult;
     }
 
+    //分页搜索
+    @GetMapping("search/{page}/{size}/{name}")
+    public PageResult<UserRecord> searchAll(@PathVariable Integer page ,@PathVariable Integer size,@PathVariable String name ){
+
+        PageRequest pageRequest = PageRequest.of(page-1, size, Sort.by(Sort.Direction.ASC,"id"));
+        Page<UserRecord> all = userRepository.findByName(name,pageRequest);
+        //总记录数
+        long totalElements = all.getTotalElements();
+        //数据列表
+        List<UserRecord> list = all.getContent();
+        //总页数
+        int totalPages = all.getTotalPages();
+        //返回的数据集
+        PageResult<UserRecord> pageResult = new PageResult<>();
+        pageResult.setCount(totalElements);
+        pageResult.setResult(list);
+        pageResult.setPage(totalPages);
+        return pageResult;
+    }
 //    //获取所有请假单
 //    @GetMapping
 //    public List<UserRecord> getAllUser()
