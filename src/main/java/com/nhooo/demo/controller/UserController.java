@@ -22,9 +22,7 @@ public class UserController
     //根据分页获取请假单
     @GetMapping("/{page}/{size}")
     public PageResult<UserRecord> findAll(@PathVariable Integer page ,@PathVariable Integer size ){
-
-        PageRequest pageRequest = PageRequest.of(page-1, size, Sort.by(Sort.Direction.ASC,"id"));
-        Page<UserRecord> all = userRepository.findAll(pageRequest);
+        Page<UserRecord> all = userService.getThePage(page,size);
         //总记录数
         long totalElements = all.getTotalElements();
         //数据列表
@@ -43,8 +41,7 @@ public class UserController
     @GetMapping("search/{page}/{size}/{name}")
     public PageResult<UserRecord> searchAll(@PathVariable Integer page ,@PathVariable Integer size,@PathVariable String name ){
 
-        PageRequest pageRequest = PageRequest.of(page-1, size, Sort.by(Sort.Direction.ASC,"id"));
-        Page<UserRecord> all = userRepository.findByName(name,pageRequest);
+        Page<UserRecord> all = userService.getThePageOfSearchForName(page, size, name);
         //总记录数
         long totalElements = all.getTotalElements();
         //数据列表

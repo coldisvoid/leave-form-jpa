@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.nhooo.demo.model.UserRecord;
 import com.nhooo.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +38,17 @@ public class UserService
     public void updateUser(UserRecord userRecord)
     {
         userRepository.save(userRecord);
+    }
+    //
+    public Page<UserRecord> getThePage(Integer page,Integer size){
+        PageRequest pageRequest = PageRequest.of(page-1, size, Sort.by(Sort.Direction.ASC,"id"));
+        Page<UserRecord> all = userRepository.findAll(pageRequest);
+        return all;
+    }
+    //
+    public Page<UserRecord> getThePageOfSearchForName(Integer page,Integer size,String name){
+        PageRequest pageRequest = PageRequest.of(page-1, size, Sort.by(Sort.Direction.ASC,"id"));
+        Page<UserRecord> all = userRepository.findByName(name,pageRequest);
+        return all;
     }
 }

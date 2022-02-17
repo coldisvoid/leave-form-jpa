@@ -19,16 +19,24 @@ public class UserRecord
     String workLocation;
     String memberType;
     Date hireDate;
+
     Date writeDate;
     String leaveType;
     String job;
     Date birthDate;
     Date graduation;
-    String reason;
-    Date leaveStart;
-    Date leaveEnd;
-    Date returnToWork;
 
+    String reason;
+
+    Date leaveStart;
+    String leaveStartPeriod;
+    Date leaveEnd;
+    String leaveEndPeriod;
+    Integer leaveTotal;
+
+    Date returnToWork;
+    String returnPeriod;
+    Integer returnTotal;
 
 
 }
