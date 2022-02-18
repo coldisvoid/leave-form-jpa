@@ -46,9 +46,28 @@ public class UserService
         return all;
     }
     //
-    public Page<UserRecord> getThePageOfSearchForName(Integer page,Integer size,String name){
+    public Page<UserRecord> getThePageOfSearchByName(Integer page,Integer size,String name){
         PageRequest pageRequest = PageRequest.of(page-1, size, Sort.by(Sort.Direction.ASC,"id"));
         Page<UserRecord> all = userRepository.findByName(name,pageRequest);
+        return all;
+    }
+    public Page<UserRecord> getThePageOfSearchByNameOrLeaveType(
+            Integer page,Integer size,String name,String leaveType){
+        PageRequest pageRequest = PageRequest.of(page-1, size, Sort.by(Sort.Direction.ASC,"id"));
+        Page<UserRecord> all=null;
+        if(name.equals("")){
+            if(leaveType.equals("")){
+                all = userRepository.findAll(pageRequest);
+            }else{
+                all=userRepository.findByLeaveType(leaveType,pageRequest);
+            }
+        }else{
+            if(leaveType.equals("")){
+                all = userRepository.findByName(name,pageRequest);
+            }else{
+                all=userRepository.findByNameAndLeaveType(name,leaveType,pageRequest);
+            }
+        }
         return all;
     }
 }

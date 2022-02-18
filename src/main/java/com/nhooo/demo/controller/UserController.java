@@ -38,10 +38,11 @@ public class UserController
     }
 
     //分页搜索
-    @GetMapping("search/{page}/{size}/{name}")
-    public PageResult<UserRecord> searchAll(@PathVariable Integer page ,@PathVariable Integer size,@PathVariable String name ){
-
-        Page<UserRecord> all = userService.getThePageOfSearchForName(page, size, name);
+    @GetMapping("/search")
+    public PageResult<UserRecord> searchAll(@RequestParam("page") Integer page ,@RequestParam("size") Integer size,
+                                            @RequestParam("name") String name,@RequestParam("leaveType") String leaveType ){
+        System.out.println("q"+page+size+name+leaveType);
+        Page<UserRecord> all=userService.getThePageOfSearchByNameOrLeaveType(page, size, name, leaveType);
         //总记录数
         long totalElements = all.getTotalElements();
         //数据列表
