@@ -33,3 +33,6 @@
 
 【作业类型】：
 注：学员必须按照管理员所设置的附件类型来上传附件。
+
+Spring技术自定义注解和Aop实现事务框架
+https://www.bilibili.com/video/BV1aC4y1p7bF

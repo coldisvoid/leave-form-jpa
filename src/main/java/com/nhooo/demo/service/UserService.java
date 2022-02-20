@@ -2,6 +2,7 @@ package com.nhooo.demo.service;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.nhooo.demo.aop.MyTransactional;
 import com.nhooo.demo.model.UserRecord;
 import com.nhooo.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService
@@ -24,6 +26,7 @@ public class UserService
         return userRecords;
     }
     //增加
+    @MyTransactional
     public void addUser(UserRecord userRecord)
     {
         userRepository.save(userRecord);
@@ -35,6 +38,7 @@ public class UserService
 
     }
     //
+
     public void updateUser(UserRecord userRecord)
     {
         userRepository.save(userRecord);
