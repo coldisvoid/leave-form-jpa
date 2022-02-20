@@ -27,9 +27,9 @@ public class UserService
     }
     //增加
     @MyTransactional
-    public void addUser(UserRecord userRecord)
+    public UserRecord addUser(UserRecord userRecord)
     {
-        userRepository.save(userRecord);
+        return userRepository.save(userRecord);
     }
     //
     public void deleteUser(int id)
