@@ -21,15 +21,14 @@ public class HistoryService
     @Autowired
     private HistoryRepository historyRepository;
     //获取所有
-    public List<HistoryRecord> getAllUsers()
+    public List<HistoryRecord> getAllRecords(Integer uid)
     {
         List<HistoryRecord>historyRecords = new ArrayList<>();
-
-        historyRepository.findAll(Sort.by(Sort.Direction.ASC,"hid")).forEach(historyRecords::add);
+        historyRecords = historyRepository.findByUid(uid);
         return historyRecords;
     }
     //增加
-    public void addUser(HistoryRecord historyRecord)
+    public void addRecord(HistoryRecord historyRecord)
     {
         historyRepository.save(historyRecord);
     }

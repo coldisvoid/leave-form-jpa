@@ -1,7 +1,9 @@
 package com.nhooo.demo.controller;
+import com.nhooo.demo.model.HistoryRecord;
 import com.nhooo.demo.model.PageResult;
 import com.nhooo.demo.model.UserRecord;
 import com.nhooo.demo.repository.UserRepository;
+import com.nhooo.demo.service.HistoryService;
 import com.nhooo.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +21,14 @@ public class UserController
     @Autowired
     private UserService userService;
     @Autowired
-    private UserRepository userRepository;
+    private HistoryService historyService;
+
+    //获取所有
+    @GetMapping("/history/{uid}")
+    public List<HistoryRecord> findHistory(@PathVariable Integer uid){
+        return historyService.getAllRecords(uid);
+    }
+
     //根据分页获取请假单
     @GetMapping("/{page}/{size}")
     public PageResult<UserRecord> findAll(@PathVariable Integer page ,@PathVariable Integer size ){

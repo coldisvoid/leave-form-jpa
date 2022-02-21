@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionStatus;
 
+
+
 @Component
 @Slf4j
 @Aspect
@@ -37,18 +39,15 @@ public class TransactionalAop {
 
             Object arg = joinPoint.getArgs()[0];
 
-
-
             HistoryRecord target = new HistoryRecord();
             BeanUtils.copyProperties(arg,target);
-            System.out.println(arg.toString());
-            System.out.println(target.toString());
-            historyService.addUser(target);
-            UserRecord result = (UserRecord)joinPoint.proceed();
-            System.out.println("res:"+result.toString());
 
+            UserRecord result = (UserRecord)joinPoint.proceed();
+            target.setUid(result.getId());
+            historyService.addRecord(target);
             log.info("commit");
             transactionUtils.commit(begin);
+
             return result;
         } catch (Throwable throwable){
             throwable.printStackTrace();

@@ -14,9 +14,9 @@ public class HistoryRecord
 {
     @GeneratedValue(strategy = GenerationType.AUTO)   //生成策略，这里配置为自增
     @Id
-    int hid;
-    Date createTime;
     int id;
+    Date createTime;
+    Integer uid;
     String name;
     String department;
     String workLocation;
