@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -15,7 +16,7 @@ public class HistoryRecord
     @GeneratedValue(strategy = GenerationType.AUTO)   //生成策略，这里配置为自增
     @Id
     int id;
-    Date createTime;
+    Timestamp createTime;
     Integer uid;
     String name;
     String department;

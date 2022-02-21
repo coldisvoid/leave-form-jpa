@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionStatus;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 
 
 @Component
@@ -44,6 +46,9 @@ public class TransactionalAop {
 
             UserRecord result = (UserRecord)joinPoint.proceed();
             target.setUid(result.getId());
+
+            Timestamp a =  new java.sql.Timestamp(System.currentTimeMillis());
+            target.setCreateTime(a);
             historyService.addRecord(target);
             log.info("commit");
             transactionUtils.commit(begin);
