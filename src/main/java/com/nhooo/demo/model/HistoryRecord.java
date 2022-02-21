@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Entity
 public class HistoryRecord
 {
-    @GeneratedValue(strategy = GenerationType.AUTO)   //生成策略，这里配置为自增
+    @GeneratedValue(strategy = GenerationType.AUTO)   //生成策略
     @Id
     int id;
     Timestamp createTime;

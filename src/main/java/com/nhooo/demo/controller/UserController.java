@@ -34,9 +34,11 @@ public class UserController
     public PageResult<UserRecord> findAll(@PathVariable Integer page ,@PathVariable Integer size ){
         Page<UserRecord> all = userService.getThePage(page,size);
         //总记录数
-        long totalElements = all.getTotalElements();
+        long totalElements;
+        totalElements = all.getTotalElements();
         //数据列表
-        List<UserRecord> list = all.getContent();
+        List<UserRecord> list;
+        list = all.getContent();
         //总页数
         int totalPages = all.getTotalPages();
         //返回的数据集
@@ -81,6 +83,7 @@ public class UserController
     {
 
         System.out.println("post");
+        userRecord.setDeleted(false);
         userService.addUser(userRecord);
     }
     //删除一个请假单
@@ -88,7 +91,8 @@ public class UserController
     public void deleteUser(@PathVariable Integer id)
     {
         System.out.println("delete");
-        userService.deleteUser(id);
+        userService.setDeletedFlag(id);
+        //userService.deleteUser(id);
     }
     //修改一个请假单
     @PutMapping

@@ -4,9 +4,8 @@ package com.nhooo.demo.aop;
 import com.nhooo.demo.model.HistoryRecord;
 import com.nhooo.demo.model.UserRecord;
 import com.nhooo.demo.repository.HistoryRepository;
-import com.nhooo.demo.repository.UserRepository;
 import com.nhooo.demo.service.HistoryService;
-import com.nhooo.demo.service.UserService;
+
 import com.nhooo.demo.utils.TransactionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -30,21 +29,18 @@ public class TransactionalAop {
     private TransactionUtils transactionUtils;
     @Autowired
     private HistoryService historyService;
-    @Autowired
-    private HistoryRepository historyRepository;
 
     @Around(value = "@annotation(com.nhooo.demo.aop.MyTransactional)")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         TransactionStatus begin=null;
         try{
             begin= transactionUtils.begin();
-
             Object arg = joinPoint.getArgs()[0];
-
             HistoryRecord target = new HistoryRecord();
             BeanUtils.copyProperties(arg,target);
 
             UserRecord result = (UserRecord)joinPoint.proceed();
+            //获得UserRecord Id
             target.setUid(result.getId());
 
             Timestamp a =  new java.sql.Timestamp(System.currentTimeMillis());

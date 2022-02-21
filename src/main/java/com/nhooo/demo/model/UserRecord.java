@@ -38,5 +38,6 @@ public class UserRecord
     String returnPeriod;
     Integer returnTotal;
 
+    Boolean deleted;
 
 }
