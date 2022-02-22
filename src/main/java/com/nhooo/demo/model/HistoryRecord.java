@@ -16,8 +16,8 @@ public class HistoryRecord
     @GeneratedValue(strategy = GenerationType.AUTO)   //生成策略
     @Id
     int id;
-    Timestamp createTime;
-    Integer uid;
+    Timestamp createTime;//变更时间
+    Integer uid;//指定被变更的记录id
     String name;
     String department;
     String workLocation;
