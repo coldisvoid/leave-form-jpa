@@ -42,9 +42,8 @@ public class TransactionalAop {
             UserRecord result = (UserRecord)joinPoint.proceed();
             //获得UserRecord Id
             target.setUid(result.getId());
-
-            Timestamp a =  new java.sql.Timestamp(System.currentTimeMillis());
-            target.setCreateTime(a);
+            Timestamp timestamp =  new java.sql.Timestamp(System.currentTimeMillis());
+            target.setCreateTime(timestamp);
             historyService.addRecord(target);
             log.info("commit");
             transactionUtils.commit(begin);
